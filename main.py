@@ -50,7 +50,7 @@ def add_data():
     # # user = db_sess.query(User).filter(User.id == 1).first()
     # # print(user)
     # jobs = Jobs(job="Вторая работа", collaborators="Ivanov", team_leader=2, is_finished=False)
-    #
+
     # db_sess.add(jobs)
     print(jobs.job, "jobs.collaborators=", jobs.collaborators,"jobs.work_size =",jobs.work_size)
     db_sess.commit()
