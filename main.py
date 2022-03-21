@@ -44,14 +44,15 @@ def add_data():
 
     print("cap and 3 col")
     # Добавление работ
-    # jobs = Jobs(job="Первая работа", collaborators="Petrov", team_leader=1, is_finished=False)
-    # db_sess.add(jobs)
+    jobs = Jobs(job="Первая работа",work_size = 15,collaborators="2,3", team_leader=1, is_finished=False)
+    db_sess.add(jobs)
     # # Несколько другой способ внесения связанных данных в БД
     # # user = db_sess.query(User).filter(User.id == 1).first()
     # # print(user)
     # jobs = Jobs(job="Вторая работа", collaborators="Ivanov", team_leader=2, is_finished=False)
     #
     # db_sess.add(jobs)
+    print(jobs.job, "jobs.collaborators=", jobs.collaborators,"jobs.work_size =",jobs.work_size)
     db_sess.commit()
     return "Данные добавлены!<p><a href='.'>назад</a></p>"
 
