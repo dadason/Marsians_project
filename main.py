@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    db_session.global_init("db/blog .db")
+    db_session.global_init('db/new.db')
     app.run()
 
 
@@ -19,16 +19,16 @@ def add_data():
     db_sess = db_session.create_session()
 
     # Добавление пользователей
-    user = User()
-    user.surname = "Scott"
-    user.name = "Rdley"
-    user.email = "scott_chief@mars.org"
-    user.age = 21
-    user.position = "capitan"
-    user.speciality = "research engineer"
-    user.address = "module_1"
-    db_sess.add(user)
-    print(user.email)
+    # user = User()
+    # user.surname = "Scott"
+    # user.name = "Rdley"
+    # user.email = "scott_chief@mars.org"
+    # user.age = 21
+    # user.position = "capitan"
+    # user.speciality = "research engineer"
+    # user.address = "module_1"
+    # db_sess.add(user)
+    # print(user.email)
 
     for i in range(3):
         user = User()
@@ -38,7 +38,7 @@ def add_data():
         user.age = 1+i
         user.position = f" team {i + 1}"
         user.speciality = f"///{i + 1}"
-        user.address = f"?{i + 1}"
+        user.address = f"module_{i+1}"
         db_sess.add(user)
         print(user.email)
 
@@ -62,15 +62,17 @@ def select_data():
     db_sess = db_session.create_session()
     for user1 in db_sess.query(User).all():
         print(user1)
-    for user2 in db_sess.query(User).filter(User.id > 1, User.email.notilike("%1%")):
-        print(user2)
+    # for user2 in db_sess.query(User).filter(User.id > 1, User.email.notilike("%1%")):
+    #     print(user2)
     return "Данные выбраны!<p><a href='.'>назад</a></p>"
 
 
 @app.route("/delete_data")
 def delete_data():
     db_sess = db_session.create_session()
+    print("after dreate session in delete")
     db_sess.query(User).filter(User.id >= 2).delete()
+    print("ater delete")
     db_sess.commit()
     return "Данные удалены!<p><a href='.'>назад</a></p>"
 
@@ -111,6 +113,25 @@ def login():
     # for user in db_session.query(User).all():
     #     print(user)
     return render_template('login.html', title='Вход', form=form)
+
+
+@app.route('/query1', methods=['GET', 'POST'])
+def query1():
+
+    # db_name = input()
+
+    db_session.global_init('db/new.db')
+
+    db_sess = db_session.create_session()
+    print("session in query1")
+
+    for user1 in db_sess.query(User).all():
+        print(user1)
+
+    for user1 in db_sess.query(User).filter(User.address.like("module_1")):
+        print(user1,user1.address)
+    return "Данные отфильтрованы по запросу 1<p><a href='.'>назад</a></p>"
+
 
 
 if __name__ == '__main__':
