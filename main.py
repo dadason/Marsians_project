@@ -118,15 +118,15 @@ def login():
 @app.route('/query1', methods=['GET', 'POST'])
 def query1():
 
-    # db_name = input()
+    db_name = input()
 
-    db_session.global_init('db/new.db')
+    db_session.global_init(db_name)
 
     db_sess = db_session.create_session()
-    print("session in query1")
+    print("live in module 1")
 
-    for user1 in db_sess.query(User).all():
-        print(user1)
+    # for user1 in db_sess.query(User).all():
+    #     print(user1)
 
     for user1 in db_sess.query(User).filter(User.address.like("module_1")):
         print(user1,user1.address)
