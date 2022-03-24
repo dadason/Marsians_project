@@ -129,7 +129,7 @@ def query1():
     #     print(user1)
 
     for user1 in db_sess.query(User).filter(User.address.like("module_1")):
-        print(user1,user1.address)
+        print(user1)
     return "Данные отфильтрованы по запросу 1<p><a href='.'>назад</a></p>"
 
 
